@@ -1,0 +1,48 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #03030d;
+  color: #c4c7f2;
+  font-family: 'Syne', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: #03030d;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(9, 65, 202, 0.4);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(30, 151, 242, 0.6);
+}
+
+input, textarea, button {
+  font-family: 'Syne', sans-serif;
+}
+
+input::placeholder, textarea::placeholder {
+  color: rgba(196, 199, 242, 0.2);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
