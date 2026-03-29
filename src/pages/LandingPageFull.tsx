@@ -205,17 +205,8 @@ export default function LandingPage({ onNavigate }: { onNavigate?: (screen: stri
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: "36px" }}>
-          {["How it works", "Investors", "Founders"].map(item => (
-            <span key={item} style={{
-              fontSize: "13px", color: "rgba(196,199,242,0.5)", cursor: "pointer",
-              transition: "color 0.2s", letterSpacing: "0.03em", fontWeight: 500,
-            }}
-              onMouseEnter={e => (e.target as HTMLElement).style.color = "#c4c7f2"}
-              onMouseLeave={e => (e.target as HTMLElement).style.color = "rgba(196,199,242,0.5)"}
-            >{item}</span>
-          ))}
           <button
-            onClick={() => onNavigate?.("onboarding")}
+            onClick={() => onNavigate?.("auth")}
             style={{
               background: "#091eca",
               color: "#c4c7f2",
@@ -232,7 +223,7 @@ export default function LandingPage({ onNavigate }: { onNavigate?: (screen: stri
             onMouseEnter={e => (e.target as HTMLButtonElement).style.background = "#1e97f2"}
             onMouseLeave={e => (e.target as HTMLButtonElement).style.background = "#091eca"}
           >
-            Get started
+            Login
           </button>
         </div>
       </nav>
@@ -304,7 +295,7 @@ export default function LandingPage({ onNavigate }: { onNavigate?: (screen: stri
 
           <div style={{ display: "flex", gap: "14px", alignItems: "center" }}>
             <button
-              onClick={() => onNavigate?.("onboarding")}
+              onClick={() => onNavigate?.("discover")}
               style={{
                 background: "#091eca",
                 color: "#c4c7f2",
@@ -323,7 +314,9 @@ export default function LandingPage({ onNavigate }: { onNavigate?: (screen: stri
             >
               Launch intelligence →
             </button>
-            <button style={{
+            <button
+              onClick={() => onNavigate?.("dashboard")}
+              style={{
               background: "transparent",
               color: "rgba(196,199,242,0.5)",
               border: "1px solid rgba(9,65,202,0.3)",
@@ -507,7 +500,7 @@ export default function LandingPage({ onNavigate }: { onNavigate?: (screen: stri
           </p>
           <div style={{ display: "flex", gap: "14px", justifyContent: "center" }}>
             <button
-              onClick={() => onNavigate?.("onboarding")}
+              onClick={() => onNavigate?.("discover")}
               style={{
                 background: "#091eca", color: "#c4c7f2", border: "none",
                 padding: "14px 36px", borderRadius: "8px", fontSize: "14px",
@@ -520,7 +513,7 @@ export default function LandingPage({ onNavigate }: { onNavigate?: (screen: stri
               Start demo
             </button>
             <button
-              onClick={() => onNavigate?.("onboarding")}
+              onClick={() => onNavigate?.("dashboard")}
               style={{
                 background: "transparent", color: "rgba(196,199,242,0.5)",
                 border: "1px solid rgba(9,65,202,0.3)", padding: "14px 36px",
