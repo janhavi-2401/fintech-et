@@ -1,31 +1,38 @@
 import { useState, useEffect, useRef } from "react";
 
 const STATS = [
-  { value: "94%", label: "Match accuracy" },
-  { value: "3.2x", label: "Faster fundraising" },
-  { value: "$4.2B", label: "Capital connected" },
-  { value: "8,400+", label: "Startups onboarded" },
+  { value: "14Cr+", label: "Demat accounts in India" },
+  { value: "30s", label: "Signal refresh cycle" },
+  { value: "4", label: "Case-ready AI modules" },
+  { value: "NSE", label: "Market-first focus" },
 ];
 
 const FEATURES = [
   {
-    tag: "SEMANTIC ENGINE",
-    title: "Beyond keywords",
-    body: "Embeddings trained on 10M+ investment decisions map your thesis to opportunity, not by what you say, but what you mean.",
-    metric: "94.7% precision",
+    tag: "OPPORTUNITY RADAR",
+    title: "Signal-first alerts",
+    body: "Continuously monitor filings, bulk/block deals, management commentary shifts, and regulatory changes to surface opportunities before the crowd.",
+    metric: "Daily alpha feed",
   },
   {
-    tag: "AI ADVISORY",
-    title: "Match reasoning",
-    body: "Every recommendation comes with an explainable breakdown. Know exactly why a founder and investor are aligned before the first call.",
-    metric: "< 2s response",
+    tag: "CHART PATTERN AI",
+    title: "Technical patterns with context",
+    body: "Detect breakouts, reversals, and divergences across the NSE universe with plain-English reasoning and historical back-tested hit rates.",
+    metric: "Pattern confidence",
   },
   {
-    tag: "LIVE INTELLIGENCE",
-    title: "Market-aware",
-    body: "Real-time ingestion of funding news, sector shifts, and macro signals keeps your pipeline current,com not quarterly.",
-    metric: "Live data",
+    tag: "MARKET CHAT",
+    title: "Portfolio-aware Q&A",
+    body: "Ask market questions and get source-cited, multi-step answers grounded in your holdings, watchlist, and risk posture.",
+    metric: "Cited responses",
   },
+];
+
+const CASE_TRACKS = [
+  "Opportunity Radar — signal finder over filings + flow + commentary",
+  "Chart Pattern Intelligence — real-time breakout/reversal detection",
+  "Market ChatGPT (rebuilt better) — deeper, portfolio-aware analysis",
+  "AI Market Video Engine — auto-generated daily visual market briefings",
 ];
 
 function TriangleMesh() {
@@ -198,17 +205,8 @@ export default function LandingPage({ onNavigate }: { onNavigate?: (screen: stri
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: "36px" }}>
-          {["How it works", "Investors", "Founders"].map(item => (
-            <span key={item} style={{
-              fontSize: "13px", color: "rgba(196,199,242,0.5)", cursor: "pointer",
-              transition: "color 0.2s", letterSpacing: "0.03em", fontWeight: 500,
-            }}
-              onMouseEnter={e => (e.target as HTMLElement).style.color = "#c4c7f2"}
-              onMouseLeave={e => (e.target as HTMLElement).style.color = "rgba(196,199,242,0.5)"}
-            >{item}</span>
-          ))}
           <button
-            onClick={() => onNavigate?.("onboarding")}
+            onClick={() => onNavigate?.("auth")}
             style={{
               background: "#091eca",
               color: "#c4c7f2",
@@ -225,7 +223,7 @@ export default function LandingPage({ onNavigate }: { onNavigate?: (screen: stri
             onMouseEnter={e => (e.target as HTMLButtonElement).style.background = "#1e97f2"}
             onMouseLeave={e => (e.target as HTMLButtonElement).style.background = "#091eca"}
           >
-            Get started
+            Login
           </button>
         </div>
       </nav>
@@ -257,31 +255,21 @@ export default function LandingPage({ onNavigate }: { onNavigate?: (screen: stri
           }}>
             <div style={{ width: "6px", height: "6px", background: "#1e97f2", borderRadius: "50%", animation: "pulse 2s infinite" }} />
             <span style={{ fontSize: "11px", color: "#1e97f2", letterSpacing: "0.12em", fontWeight: 600 }}>
-              AI-POWERED INVESTOR MATCHING
+              AI FOR THE INDIAN INVESTOR
             </span>
           </div>
 
           <h1 style={{
             fontFamily: "'Marcellus', serif",
-            fontSize: "clamp(56px, 8vw, 108px)",
-            lineHeight: "1.0",
-            color: "#c4c7f2",
-            marginBottom: "10px",
-            fontWeight: 400,
-          }}>
-            Capital meets
-          </h1>
-          <h1 style={{
-            fontFamily: "'Marcellus', serif",
-            fontSize: "clamp(56px, 8vw, 108px)",
-            lineHeight: "1.0",
+            fontSize: "clamp(54px, 6vw, 88px)",
+            lineHeight: "1.08",
             marginBottom: "36px",
             fontWeight: 400,
             background: "linear-gradient(90deg, #1e97f2, #091eca)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
           }}>
-            opportunity.
+            An AI to help you find your perfect match investor/founder
           </h1>
 
           <p style={{
@@ -292,12 +280,12 @@ export default function LandingPage({ onNavigate }: { onNavigate?: (screen: stri
             marginBottom: "52px",
             fontWeight: 400,
           }}>
-            AI-powered semantic matching between founders and investors. Not keywords but intelligence. Every match explained, every connection meaningful.
+            India has massive retail participation, but decisions still run on noise. We turn filings, price action, and flows into actionable, explainable market intelligence.
           </p>
 
           <div style={{ display: "flex", gap: "14px", alignItems: "center" }}>
             <button
-              onClick={() => onNavigate?.("onboarding")}
+              onClick={() => onNavigate?.("discover")}
               style={{
                 background: "#091eca",
                 color: "#c4c7f2",
@@ -314,9 +302,11 @@ export default function LandingPage({ onNavigate }: { onNavigate?: (screen: stri
               onMouseEnter={e => { (e.target as HTMLButtonElement).style.background = "#1e97f2"; (e.target as HTMLButtonElement).style.transform = "translateY(-2px)"; }}
               onMouseLeave={e => { (e.target as HTMLButtonElement).style.background = "#091eca"; (e.target as HTMLButtonElement).style.transform = "translateY(0)"; }}
             >
-              Find your match →
+              Start demo
             </button>
-            <button style={{
+            <button
+              onClick={() => onNavigate?.("dashboard")}
+              style={{
               background: "transparent",
               color: "rgba(196,199,242,0.5)",
               border: "1px solid rgba(9,65,202,0.3)",
@@ -331,7 +321,7 @@ export default function LandingPage({ onNavigate }: { onNavigate?: (screen: stri
               onMouseEnter={e => { (e.target as HTMLButtonElement).style.borderColor = "#1e97f2"; (e.target as HTMLButtonElement).style.color = "#c4c7f2"; }}
               onMouseLeave={e => { (e.target as HTMLButtonElement).style.borderColor = "rgba(9,65,202,0.3)"; (e.target as HTMLButtonElement).style.color = "rgba(196,199,242,0.5)"; }}
             >
-              See demo
+              Open dashboard
             </button>
           </div>
         </div>
@@ -395,7 +385,7 @@ export default function LandingPage({ onNavigate }: { onNavigate?: (screen: stri
             fontWeight: 400,
             lineHeight: 1.1,
           }}>
-            How Fintech AI works
+            What we may build (case-aligned)
           </h2>
         </div>
 
@@ -444,6 +434,26 @@ export default function LandingPage({ onNavigate }: { onNavigate?: (screen: stri
         </div>
       </section>
 
+      <section style={{ padding: "0 80px 90px" }}>
+        <div style={{
+          border: "1px solid rgba(9,65,202,0.25)",
+          background: "#06091a",
+          borderRadius: "14px",
+          padding: "30px 34px",
+        }}>
+          <div style={{ fontSize: "11px", color: "#1e97f2", letterSpacing: "0.18em", fontWeight: 600, marginBottom: "18px" }}>
+            CASE #6 FIT
+          </div>
+          <ul style={{ margin: 0, paddingLeft: "20px", display: "grid", gap: "12px" }}>
+            {CASE_TRACKS.map(item => (
+              <li key={item} style={{ color: "rgba(196,199,242,0.65)", lineHeight: 1.6, fontSize: "15px" }}>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
       <section style={{
         margin: "0 80px 100px",
         background: "linear-gradient(135deg, #06091a 0%, #030a1f 100%)",
@@ -470,17 +480,17 @@ export default function LandingPage({ onNavigate }: { onNavigate?: (screen: stri
             fontSize: "clamp(40px, 5vw, 68px)",
             color: "#c4c7f2", fontWeight: 400, lineHeight: 1.1, marginBottom: "20px",
           }}>
-            Ready to find your match?
+            Ready to build the investor intelligence layer?
           </h2>
           <p style={{
             color: "rgba(196,199,242,0.4)", fontSize: "15px",
             maxWidth: "400px", margin: "0 auto 44px", lineHeight: 1.75,
           }}>
-            Whether you're raising your Series A or deploying your next fund, your match is already in the system.
+            Start with Opportunity Radar and Chart Pattern Intelligence, then layer portfolio-aware Market Chat for real investment decisions.
           </p>
           <div style={{ display: "flex", gap: "14px", justifyContent: "center" }}>
             <button
-              onClick={() => onNavigate?.("onboarding")}
+              onClick={() => onNavigate?.("discover")}
               style={{
                 background: "#091eca", color: "#c4c7f2", border: "none",
                 padding: "14px 36px", borderRadius: "8px", fontSize: "14px",
@@ -490,10 +500,10 @@ export default function LandingPage({ onNavigate }: { onNavigate?: (screen: stri
               onMouseEnter={e => { (e.target as HTMLButtonElement).style.background = "#1e97f2"; (e.target as HTMLButtonElement).style.transform = "translateY(-2px)"; }}
               onMouseLeave={e => { (e.target as HTMLButtonElement).style.background = "#091eca"; (e.target as HTMLButtonElement).style.transform = "translateY(0)"; }}
             >
-              I'm a Founder
+              Start demo
             </button>
             <button
-              onClick={() => onNavigate?.("onboarding")}
+              onClick={() => onNavigate?.("dashboard")}
               style={{
                 background: "transparent", color: "rgba(196,199,242,0.5)",
                 border: "1px solid rgba(9,65,202,0.3)", padding: "14px 36px",
@@ -503,7 +513,7 @@ export default function LandingPage({ onNavigate }: { onNavigate?: (screen: stri
               onMouseEnter={e => { (e.target as HTMLButtonElement).style.borderColor = "#1e97f2"; (e.target as HTMLButtonElement).style.color = "#c4c7f2"; }}
               onMouseLeave={e => { (e.target as HTMLButtonElement).style.borderColor = "rgba(9,65,202,0.3)"; (e.target as HTMLButtonElement).style.color = "rgba(196,199,242,0.5)"; }}
             >
-              I'm an Investor
+              Open dashboard
             </button>
           </div>
         </div>
