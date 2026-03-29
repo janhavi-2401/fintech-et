@@ -1,35 +1,83 @@
-## Fintech Frontend + Backend Prototype
-<p>This project is a hackathon prototype connecting startups with investors in a FinTech context. It features a JavaScript-based frontend (built with Vite) and a Python FastAPI backend. Startups can upload their pitch decks as PDFs, and the system matches them with investors based on investment thesis. The backend uses an in-memory data store (a simple Python dictionary) for quick prototyping
-, with plans to switch to a persistent database in a full product. We also integrate an AI-powered intro service: for a given startup and investor, the /intro/{startup_id}/{investor_id} endpoint generates a draft introduction email using a language model.</p><br>
+## 🚀 Fintech Frontend + Backend Prototype
 
-## System Architecture
-The application has three layers: the Client (Frontend), the API (Backend), and the Data layer. The browser frontend (hosted by Vite) allows users to sign in as either a startup or an investor. Startups can upload a pitch deck (PDF) via a form. This is sent to the FastAPI backend at POST /startup/upload-deck. FastAPI handles the file upload using its UploadFile feature, which efficiently streams the file (spooling to disk if it’s large)
-. Once processed, the backend updates its in-memory store of startups.<br><br>
+**Fintech** is a hackathon prototype designed to connect startups with investors using AI in a FinTech ecosystem. It features a JavaScript-based frontend (built with Vite) and a Python FastAPI backend. Startups can upload their pitch decks as PDFs, and the system intelligently matches them with investors based on their investment thesis and preferences.
 
-Investors register via POST /investor/register with their name, firm, thesis, and preferred sectors/stages. The backend stores this in-memory as well. The matching logic then uses these records: GET /startup/{id}/matches returns investors whose preferences align with a given startup, and GET /investor/{id}/dealflow returns startups for an investor’s pipeline. Finally, the /intro/{startup_id}/{investor_id} endpoint uses our AI service to <br>draft a personalized intro email between the startup and investor.<br><br>
+To enable rapid development, the backend uses an in-memory data store (a simple Python dictionary) instead of a full database. While this keeps the prototype fast and lightweight, it is designed to be replaced with a persistent database in a production-ready system. Additionally, the platform integrates an AI-powered introduction service — using the `/intro/{startup_id}/{investor_id}` endpoint, it generates personalized draft emails to connect startups with relevant investors.
 
-All API routes are documented by FastAPI with an auto-generated Swagger UI at /docs<br>
-, allowing easy testing of endpoints. In our prototype, we skip a full database: as one expert notes, “start with a simple in-memory data store – a list of objects… and add persistence later when needed”<br>
-. This speeds up hackathon development but should be replaced with a real database in production.<br>
+---
 
-## Authentication Flow
-Local Demo Auth: There is no real backend authentication in this prototype. On the login screen, enter any non-empty name, email, and password to continue.<br>
-Role Selection: After “logging in,” you choose a role:<br>
-Startup → you go to the Startup Dashboard.<br>
-Investor → you go to the Investor Dashboard.<br>
-Session Persistence: The app saves the session in localStorage (browser storage) so you stay logged in. To reset, use the Logout button, which clears localStorage.<br>
-Dashboards: Both dashboards are simple. A startup can upload its pitch deck PDF. An investor can register their thesis or view incoming startups (dealflow).<br>
-Key API Endpoints<br>
-POST /startup/upload-deck — Upload a startup pitch deck PDF (submitted as form-data). FastAPI’s UploadFile handles the incoming file efficiently<br>
-.<br>
-GET /startup/{id}/matches — Get investor matches for a startup (returns a JSON list of investor IDs and match details).<br>
-POST /investor/register — Register a new investor by providing JSON with partner_name, firm_name, thesis, sectors, and stages.<br>
-GET /investor/{id}/dealflow — Get the startup dealflow (a list of startup IDs) for a registered investor.<br>
-GET /intro/{startup_id}/{investor_id} — Generate a draft intro email connecting the given startup and investor (uses our AI service under the hood).<br>
-GET /docs — View the Swagger UI docs for all endpoints<br>
-.
-Each endpoint responds with JSON. For example, after registering an investor or uploading a deck, the response includes an ID (e.g. investor_id or startup_id) that you’ll use in later API calls.<br>
+## 🏗️ System Architecture
 
+The application follows a **three-layer architecture**:
+
+- **Frontend (Client Layer):**  
+  A browser-based UI (powered by Vite) where users can sign in as either a startup or an investor.
+
+- **Backend (API Layer):**  
+  Built using FastAPI, it handles file uploads, user data, matching logic, and AI-based services.
+
+- **Data Layer:**  
+  Uses an in-memory data structure for storing startup and investor information during the prototype phase.
+
+### 🔄 Workflow
+
+- Startups upload pitch decks (PDF) via `POST /startup/upload-deck`  
+- Investors register via `POST /investor/register` with details like firm name, thesis, and preferences  
+- Matching system:
+  - `GET /startup/{id}/matches` → finds relevant investors  
+  - `GET /investor/{id}/dealflow` → shows startup pipeline  
+
+- AI integration:
+  - `GET /intro/{startup_id}/{investor_id}` → generates a personalized intro email  
+
+All API routes are auto-documented using FastAPI’s Swagger UI at `/docs`, making testing and exploration easy.
+
+---
+
+## 🔐 Authentication Flow
+
+This prototype uses a **simplified local authentication system**:
+
+- **Login:**  
+  Users can enter any non-empty name, email, and password to proceed
+
+- **Role Selection:**  
+  - Startup → redirected to Startup Dashboard  
+  - Investor → redirected to Investor Dashboard  
+
+- **Session Management:**  
+  - Stored in `localStorage`  
+  - Logout clears session data  
+
+- **Dashboards:**  
+  - Startups → upload pitch decks  
+  - Investors → register preferences and view dealflow  
+
+---
+
+## 📡 Key API Endpoints
+
+- `POST /startup/upload-deck`  
+  Upload a startup pitch deck (PDF via form-data)
+
+- `GET /startup/{id}/matches`  
+  Retrieve investor matches for a startup
+
+- `POST /investor/register`  
+  Register an investor with firm details and preferences
+
+- `GET /investor/{id}/dealflow`  
+  Get startup pipeline for an investor
+
+- `GET /intro/{startup_id}/{investor_id}`  
+  Generate an AI-powered intro email
+
+- `GET /docs`  
+  Access Swagger UI for testing all endpoints
+
+---
+
+💡 All endpoints return JSON responses. After creating a startup or investor, you’ll receive an ID (e.g., `startup_id`, `investor_id`) which is used for further API interactions.
 ## Backend setup
 
 ```bash
