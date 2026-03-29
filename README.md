@@ -1,83 +1,10 @@
-## 🚀 Fintech Frontend + Backend Prototype
+## What is fintech?
+Fintech Frontend + Backend Prototype is a streamlined, AI-driven platform that connects startups with investors through intelligent matching. It integrates a Vite-based frontend with a FastAPI backend to deliver a fast, modular, and scalable system.
 
-**Fintech** is a hackathon prototype designed to connect startups with investors using AI in a FinTech ecosystem. It features a JavaScript-based frontend (built with Vite) and a Python FastAPI backend. Startups can upload their pitch decks as PDFs, and the system intelligently matches them with investors based on their investment thesis and preferences.
+Startups upload pitch decks, investors define their thesis and preferences, and the platform generates high-quality matches on both sides. An embedded AI service produces personalized introduction emails, reducing friction in initial outreach.
 
-To enable rapid development, the backend uses an in-memory data store (a simple Python dictionary) instead of a full database. While this keeps the prototype fast and lightweight, it is designed to be replaced with a persistent database in a production-ready system. Additionally, the platform integrates an AI-powered introduction service — using the `/intro/{startup_id}/{investor_id}` endpoint, it generates personalized draft emails to connect startups with relevant investors.
+The system follows a clean three-layer architecture, client interface, API layer, and data layer, using an in-memory store for rapid prototyping with clear extensibility toward production-grade databases. Core workflows include deck ingestion, investor onboarding, bidirectional match discovery, and AI-assisted communication, all accessible through well-documented APIs via Swagger.
 
----
-
-## 🏗️ System Architecture
-
-The application follows a **three-layer architecture**:
-
-- **Frontend (Client Layer):**  
-  A browser-based UI (powered by Vite) where users can sign in as either a startup or an investor.
-
-- **Backend (API Layer):**  
-  Built using FastAPI, it handles file uploads, user data, matching logic, and AI-based services.
-
-- **Data Layer:**  
-  Uses an in-memory data structure for storing startup and investor information during the prototype phase.
-
-### 🔄 Workflow
-
-- Startups upload pitch decks (PDF) via `POST /startup/upload-deck`  
-- Investors register via `POST /investor/register` with details like firm name, thesis, and preferences  
-- Matching system:
-  - `GET /startup/{id}/matches` → finds relevant investors  
-  - `GET /investor/{id}/dealflow` → shows startup pipeline  
-
-- AI integration:
-  - `GET /intro/{startup_id}/{investor_id}` → generates a personalized intro email  
-
-All API routes are auto-documented using FastAPI’s Swagger UI at `/docs`, making testing and exploration easy.
-
----
-
-## 🔐 Authentication Flow
-
-This prototype uses a **simplified local authentication system**:
-
-- **Login:**  
-  Users can enter any non-empty name, email, and password to proceed
-
-- **Role Selection:**  
-  - Startup → redirected to Startup Dashboard  
-  - Investor → redirected to Investor Dashboard  
-
-- **Session Management:**  
-  - Stored in `localStorage`  
-  - Logout clears session data  
-
-- **Dashboards:**  
-  - Startups → upload pitch decks  
-  - Investors → register preferences and view dealflow  
-
----
-
-## 📡 Key API Endpoints
-
-- `POST /startup/upload-deck`  
-  Upload a startup pitch deck (PDF via form-data)
-
-- `GET /startup/{id}/matches`  
-  Retrieve investor matches for a startup
-
-- `POST /investor/register`  
-  Register an investor with firm details and preferences
-
-- `GET /investor/{id}/dealflow`  
-  Get startup pipeline for an investor
-
-- `GET /intro/{startup_id}/{investor_id}`  
-  Generate an AI-powered intro email
-
-- `GET /docs`  
-  Access Swagger UI for testing all endpoints
-
----
-
-💡 All endpoints return JSON responses. After creating a startup or investor, you’ll receive an ID (e.g., `startup_id`, `investor_id`) which is used for further API interactions.
 ## Backend setup
 
 ```bash
